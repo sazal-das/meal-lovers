@@ -1,17 +1,54 @@
 import Link from "next/link";
+import classes from "./page.module.css";
+import ImageSlideshow from "@/components/images/ImageSlideshow";
 
 export default function Home() {
   return (
-    <main>
-      <h1 style={{ color: "white", textAlign: "center" }}>
-        Time to get started!
-      </h1>
-      <p>
-        <Link href="/meals">Meals</Link> |{" "}
-        <Link href="/community">Community</Link> |{" "}
-        <Link href="/meals/share">Share a Meal</Link> |{" "}
-        <Link href="/meals/1">Meal Detail</Link>
-      </p>
-    </main>
+    <>
+      <header className={classes.header}>
+        <div className={classes.slideshow}>
+          <ImageSlideshow />
+        </div>
+        <div className="">
+          <div className={classes.hero}>
+            <h1>Next-Level Meals for Foodies</h1>
+            <p>
+              Test your cooking skills and share your best recipes with others.
+            </p>
+          </div>
+          <div className={classes.cta}>
+            <Link href="/community">Join the Community</Link>
+            <Link href="/meals">Explore Meals</Link>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section className={classes.section}>
+          <h2>How it works</h2>
+          <p>
+            Meal Lover&apos;s is a platform for foodies to share their favorite
+            recipes with the world. It&apos;s a place to discover new dishes,
+            and to connect with other food lovers.
+          </p>
+          <p>
+            Meal Lover&apos;s is a place to discover new dishes, and to connect
+            with other food lovers.
+          </p>
+        </section>
+
+        <section className={classes.section}>
+          <h2>Why Meal Lover&apos;s?</h2>
+          <p>
+            Meal Lover&apos;s is a platform for foodies to share their favorite
+            recipes with the world. It&apos;s a place to discover new dishes,
+            and to connect with other food lovers.
+          </p>
+          <p>
+            Meal Lover&apos;s is a place to discover new dishes, and to connect
+            with other food lovers.
+          </p>
+        </section>
+      </main>
+    </>
   );
 }
