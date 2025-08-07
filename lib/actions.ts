@@ -8,7 +8,10 @@ const isInvalid = (text: string) => {
   return !text || text.trim() === "";
 };
 
-export const shareMeal = async (formData: FormData) => {
+export const shareMeal = async (
+  prevState: { message?: string } | null,
+  formData: FormData
+) => {
   const meal: Meal = {
     title: formData.get("title") as string,
     slug: formData.get("title") as string,
@@ -29,7 +32,7 @@ export const shareMeal = async (formData: FormData) => {
     !meal.image ||
     (meal.image instanceof File && meal.image.size === 0)
   ) {
-    throw new Error("Invalid input");
+    return { message: "Invalid input. Please check all fields." };
   }
 
   await saveMeal(meal);
