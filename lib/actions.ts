@@ -3,6 +3,7 @@
 import { Meal } from "@/app/definations";
 import { saveMeal } from "./meals";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 const isInvalid = (text: string) => {
   return !text || text.trim() === "";
@@ -36,5 +37,6 @@ export const shareMeal = async (
   }
 
   await saveMeal(meal);
+  revalidatePath("/meals");
   redirect("/meals");
 };

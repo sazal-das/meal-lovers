@@ -4,8 +4,41 @@ import { Meal } from "@/app/definations";
 import { getMealBySlug } from "@/lib/meals";
 import { notFound } from "next/navigation";
 
-const MealDetailPage = ({ params }: { params: { slug: string } }) => {
-  const meal = getMealBySlug(params.slug) as Meal;
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await params;
+  const meal = getMealBySlug(slug) as Meal;
+  if (!meal) {
+    notFound();
+  }
+  return {
+    title: meal.title,
+    description: meal.summary,
+    keywords: [
+      "meals",
+      "food",
+      "community",
+      "recipe",
+      "recipes",
+      "meal planner",
+      "meal",
+      "food lover",
+      "food lover's",
+      "food lover's community",
+    ],
+  };
+};
+
+const MealDetailPage = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await params;
+  const meal = getMealBySlug(slug) as Meal;
 
   if (!meal) {
     notFound();
@@ -17,7 +50,7 @@ const MealDetailPage = ({ params }: { params: { slug: string } }) => {
     <>
       <header className={classes.header}>
         <div className={classes.image}>
-          <Image src={meal.image} fill alt={meal.title} />
+          <Image src={meal.image as string} fill alt={meal.title} />
         </div>
         <div className={classes.headerText}>
           <h1>{meal.title}</h1>
